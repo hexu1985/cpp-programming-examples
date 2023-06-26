@@ -6,4 +6,5 @@
 - [Effective Modern C++](Effective.Modern.Cpp)
 - [C++性能优化指南](Optimized.Cpp)
 - [深入应用C++11代码优化与工程级应用](In.Depth.Cpp.11)
+- [Accelerated C++](Accelerated.Cpp)
 
