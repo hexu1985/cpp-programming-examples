@@ -4,4 +4,5 @@
 - [C++ Primer](Cpp.Primer)
 - [Effective C++](Effective.Cpp)
 - [Effective Modern C++](Effective.Modern.Cpp)
+- [C++性能优化指南](Optimized.Cpp)
 
