@@ -13,4 +13,5 @@
 - [标准C++输入输出流与本地化](Standard.Cpp.IOStreams.And.Locales)
 - [C++标准库](The.Cpp.Standard.Library)
 - [C++17 STL Cookbook](Cpp17.STL.Cookbook)
+- [C++ Cookbook](Cpp.Cookbook)
 
