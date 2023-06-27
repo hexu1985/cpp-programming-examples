@@ -14,4 +14,5 @@
 - [C++标准库](The.Cpp.Standard.Library)
 - [C++17 STL Cookbook](Cpp17.STL.Cookbook)
 - [C++ Cookbook](Cpp.Cookbook)
+- [C++标准库扩展权威指南](The.Cpp.Standard.Library.Extentions)
 
