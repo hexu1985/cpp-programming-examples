@@ -16,4 +16,5 @@
 - [C++ Cookbook](Cpp.Cookbook)
 - [C++标准库扩展权威指南](The.Cpp.Standard.Library.Extentions)
 - [超越C++标准库](Beyond.The.Cpp.Standard.Library)
+- [深入实践Boost Boost程序库开发的94个秘笈](Boost.Cpp.Application.Development.Cookbook)
 
