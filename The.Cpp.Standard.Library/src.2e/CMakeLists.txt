@@ -1,0 +1,37 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+ 
+project(cpp_std_lib_2e)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /utf-8")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} /utf-8")
+endif()
+
+if(WIN32)
+	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    set(LIBS_SYSTEM )
+else()
+    set(LIBS_SYSTEM pthread rt)
+endif()
+
+#include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+add_subdirectory(algo)
+add_subdirectory(alloc)
+add_subdirectory(concurrency)
+add_subdirectory(cont)
+add_subdirectory(contadapt)
+add_subdirectory(fo)
+add_subdirectory(i18n)
+add_subdirectory(io)
+add_subdirectory(iter)
+add_subdirectory(lang)
+add_subdirectory(num)
+add_subdirectory(regex)
+add_subdirectory(stl)
+add_subdirectory(string)
+add_subdirectory(util)
