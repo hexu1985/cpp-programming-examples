@@ -10,4 +10,5 @@
 - [C++编程你也行](You.Can.Program.In.Cpp)
 - [C++ Templates](Cpp.Templates)
 - [C++设计新思维 泛型编程与设计模式之应用](Modern.Cpp.Design)
+- [标准C++输入输出流与本地化](Standard.Cpp.IOStreams.And.Locales)
 
