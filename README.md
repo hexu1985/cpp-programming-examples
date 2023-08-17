@@ -15,6 +15,7 @@
 - [C++17 STL Cookbook](Cpp17.STL.Cookbook)
 - [C++ Cookbook](Cpp.Cookbook)
 - [C++标准库扩展权威指南](The.Cpp.Standard.Library.Extentions)
+- [C++并发编程实战](Cpp.Concurrency.In.Action)
 - [超越C++标准库](Beyond.The.Cpp.Standard.Library)
 - [深入实践Boost Boost程序库开发的94个秘笈](Boost.Cpp.Application.Development.Cookbook)
 
