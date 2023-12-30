@@ -8,8 +8,8 @@ private:
     struct node;
     struct counted_node_ptr
     {
-        int external_count;
-        node* ptr;
+        int external_count=0;
+        node* ptr=nullptr;
     };
     struct node
     {
