@@ -1,4 +1,4 @@
-### Ubuntu 18/20 安装qume+respberry+crossbuild
+hexu1985/The.Art.Of.Writing.Efficient.Programs### Ubuntu 18/20 安装qume+respberry+crossbuild
 
 1. 安装qemu
 
@@ -23,6 +23,8 @@ $ unzip 2019-07-10-raspbian-buster-lite.zip
 
 ```
 $ qemu-system-arm -M versatilepb -dtb versatile-pb.dtb -cpu arm1176 -kernel kernel-qemu-4.14.79-stretch -m 256 -drive file=2019-07-10-raspbian-buster-lite.img,format=raw -append "rw console=ttyAMA0 rootfstype=ext4 root=/dev/sda2 loglevel=8" -net user,hostfwd=tcp::22023-:22,hostfwd=tcp::9090-:9090 -net nic -serial stdio
+# 用户名和秘密为：pi/raspberry
+# 退出grab快捷键：Ctrl+Alt+g
 ```
 
 5. 打开终端并安装crossbuild
@@ -73,3 +75,4 @@ Hello, world!
         (gdb) target remote 127.0.0.1:9090 
         $ continue
         ```
+
