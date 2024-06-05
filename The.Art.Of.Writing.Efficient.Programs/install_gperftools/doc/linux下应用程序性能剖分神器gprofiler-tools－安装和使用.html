@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.shuzhiduo.com/A/KE5QmDbk5L/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="applicable-device" content="pc,mobile"><meta name="renderer" content="webkit"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5,viewport-fit=cover">
+<title>linux下应用程序性能剖分神器gprofiler-tools－安装和使用</title>	
+<!-- <link  href="//pic.ikafan.com/staticx/shuzhiduo/1/assets/prettify.css?ab" type="text/css" rel="stylesheet"/> -->
+<!-- <meta name="referrer" content="never">
+h -->
+
+<link rel="stylesheet" type="text/css" href="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/prettify.css">
+
+<link rel="stylesheet" href="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/style.css">
+<!-- <link rel="stylesheet" href="//pic.ikafan.com/staticx/shuzhiduo/1/css.grace/fontello.css?ac"> -->
+<!-- <link rel="stylesheet" href="//pic.ikafan.com/staticx/shuzhiduo/1/css.grace/animation.css?ac"> -->
+<script src="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/hm.js"></script><script src="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/hm.js"></script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f15ef43e2286a8db87bbc840d67d46b2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+<body>
+<div id="header" class="navbar navbar-default navbar-fixed-top header-01">
+	<div class="container">
+		<h1 class="logo">
+			<a href="https://www.shuzhiduo.com/" title="术之多">
+							<img src="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/logo.png" alt="术之多">
+			</a>
+		</h1>
+				<div role="navigation" class="site-nav  primary-menu">
+			<div class="menu-fix-box">
+				 <ul id="menu-navigation" class="menu">
+<li><a href="https://www.shuzhiduo.com/">首页</a></li>
+<li><a href="https://www.shuzhiduo.com/search/Python/">Python</a></li>
+<li><a href="https://www.shuzhiduo.com/search/Java/">Java</a></li>
+<!-- <li><a href="/search/PHP/">PHP</a></li> -->
+<li><a href="https://www.shuzhiduo.com/search/IOS/">IOS</a></li>
+<li><a href="https://www.shuzhiduo.com/search/Andorid/">Andorid</a></li>
+<li><a href="https://www.shuzhiduo.com/search/NodeJS/">NodeJS</a></li>
+<li><a href="https://www.shuzhiduo.com/search/JavaScript/">JavaScript</a></li>
+<li><a href="https://www.shuzhiduo.com/search/HTML5/">HTML5</a></li>
+</ul>					 			</div>
+		</div>
+				<!--<div class="right-nav">
+				<button class="js-toggle-search"><i class="icon-search"></i></button>
+		</div>-->
+       
+			</div>	
+</div>
+
+<div id="page-content">
+	<div class="container">
+		<div class="row">
+			
+			<div class="blog-post">
+								<!--<div class="posts-top-cjtz clearfix"></div>-->
+								<div class="post">
+										<div class="post-title">
+											
+						<!--<div class="post-entry-categories"><a href="/tag/abc" rel="tag">tag</a><a href="/tag/abc" rel="tag">tag2</a></div>-->
+						<h1 class="title">linux下应用程序性能剖分神器gprofiler-tools－安装和使用</h1>
+						<div class="post_icon"> 
+															<span class="icon-user-o"> 虚生</span>															
+															<span class="icon-clock-1"> 2022-11-13 </span>
+															<span class="icon-article-1"> <a href="https://www.shuzhiduo.com/link/S0U1UW1EYms1TA==" target="_blank" rel="noindex,nofollow,oarchive">原文</a> </span>
+					</div>
+										<div class="post-content">
+													
+											
+		<p>　　最近在摆弄算法的的优化，需要剖分一下算法的瓶颈，就找了一些代码剖分工具，其中</p>
+<p>gprofileer-tools是很不错的工具，gperftools时google开源的一款C++性能分析分析工具，github项目地址如下：</p>
+<p>　　　<a href="https://github.com/gperftools/gperftools" rel="external nofollow noreferrer">https://github.com/gperftools/gperftools</a></p>
+<p>　　一　下载和安装：</p>
+<p>　　１．git clone:</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">git clone </span><a href="https://github.com/gperftools/gperftools" rel="external nofollow noreferrer"><span class="pln">https</span><span class="pun">:</span><span class="com">//github.com/gperftools/gperftools</span></a></li></ol></pre>
+</div>
+<p>2 . 安装：</p>
+<p>　　　根目录下执行：sh autogen.sh</p>
+<p>　然后执行：./configure</p>
+<p>最后：make all &amp;&amp; sudo make install</p>
+<p>安装成功。</p>
+<p>　　　如果没有安装libunwind会出现如，configure执行后报警告：　　　</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">configure</span><span class="pun">:</span><span class="pln"> WARNING</span><span class="pun">:</span><span class="pln"> </span><span class="typ">No</span><span class="pln"> frame pointers </span><span class="kwd">and</span><span class="pln"> </span><span class="kwd">no</span><span class="pln"> libunwind</span><span class="pun">.</span><span class="pln"> </span><span class="typ">Using</span><span class="pln"> experimental backtrace capturing via libgcc</span><span class="pun">.</span><span class="pln"> </span><span class="typ">Expect</span><span class="pln"> crashy cpu profiler</span><span class="pun">.</span></li></ol></pre>
+</div>
+<p>　　　解决方法：</p>
+<p>使用命令<code>apt-get install libunwind8-dev</code>安装libunwind即可。</p>
+<p>　　３　最后使用ldconfig更新一下库文件即可。</p>
+<p>　　二　使用和实例：</p>
+<p>　　１　使用gprofiler-tools需要在的代码中添加如下几段代码：</p>
+<p>　　　Ａ头文件：</p>
+<p>　　　　#include &lt;gperftools/profiler.h&gt;</p>
+<p>　　　B 起止函数：</p>
+<p>　　　　修改程序的源代码使得要profiler的代码段包含在<code>ProfilerStart("name");</code>和<code>ProfilerStop();</code></p>
+<p>　　　Ｃ链接文件添加需要链接的宏：</p>
+<p>　　　　l<code>profiler　//cpu性能</code></p>
+<p><code>　　　&nbsp;</code>-ltcmalloc&nbsp; //heap资源</p>
+<p>　　２　实例：</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdio.h&gt;</span><br></li><li class="L1"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;time.h&gt;</span><br></li><li class="L2"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;stdlib.h&gt;</span><br></li><li class="L3"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;gperftools/profiler.h&gt;</span><br></li><li class="L4"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;unistd.h&gt;</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="kwd">void</span><span class="pln"> consumeSomeCPUTime1</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> input</span><span class="pun">){</span><br></li><li class="L7"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L8"><span class="pln">    input</span><span class="pun">++;</span><br></li><li class="L9"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln">i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="pun">){</span><br></li><li class="L0"><span class="pln">        i</span><span class="pun">--;</span><span class="pln">  i</span><span class="pun">++;</span><span class="pln">  i</span><span class="pun">--;</span><span class="pln">  i</span><span class="pun">++;</span><br></li><li class="L1"><span class="pln">    </span><span class="pun">}</span><br></li><li class="L2"><span class="pun">};</span><span class="pln"> </span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="kwd">void</span><span class="pln"> consumeSomeCPUTime2</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> input</span><span class="pun">){</span><br></li><li class="L5"><span class="pln">    input</span><span class="pun">++;</span><br></li><li class="L6"><span class="pln">    consumeSomeCPUTime1</span><span class="pun">(</span><span class="pln">input</span><span class="pun">);</span><br></li><li class="L7"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L8"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln">i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="pun">){</span><br></li><li class="L9"><span class="pln">        i</span><span class="pun">--;</span><span class="pln">  i</span><span class="pun">++;</span><span class="pln">  i</span><span class="pun">--;</span><span class="pln">  i</span><span class="pun">++;</span><br></li><li class="L0"><span class="pln">    </span><span class="pun">}</span><br></li><li class="L1"><span class="pun">};</span><span class="pln"> </span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="kwd">int</span><span class="pln"> stupidComputing</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> a</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> b</span><span class="pun">){</span><br></li><li class="L4"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L5"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="pun">){</span><br></li><li class="L6"><span class="pln">        consumeSomeCPUTime1</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><br></li><li class="L7"><span class="pln">    </span><span class="pun">}</span><br></li><li class="L8"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L9"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln">j</span><span class="pun">++</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="pun">){</span><br></li><li class="L0"><span class="pln">        consumeSomeCPUTime2</span><span class="pun">(</span><span class="pln">j</span><span class="pun">);</span><br></li><li class="L1"><span class="pln">    </span><span class="pun">}</span><br></li><li class="L2"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> a</span><span class="pun">+</span><span class="pln">b</span><span class="pun">;</span><br></li><li class="L3"><span class="pun">};</span><span class="pln"> </span></li><li class="L4"><span class="pln">&nbsp;</span></li><li class="L5"><span class="kwd">int</span><span class="pln"> smartComputing</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> a</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> b</span><span class="pun">){</span><br></li><li class="L6"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> a</span><span class="pun">+</span><span class="pln">b</span><span class="pun">;</span><br></li><li class="L7"><span class="pun">};</span><span class="pln"> </span></li><li class="L8"><span class="pln">&nbsp;</span></li><li class="L9"><span class="kwd">int</span><span class="pln"> main</span><span class="pun">()</span><br></li><li class="L0"><span class="pun">{</span><br></li><li class="L1"><span class="pln">    </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L2"><span class="pln">    printf</span><span class="pun">(</span><span class="str">"reached the start point of performance bottle neck\n"</span><span class="pun">);</span><br></li><li class="L3"><span class="pln">    sleep</span><span class="pun">();</span><br></li><li class="L4"><span class="pln">    </span><span class="typ">ProfilerStart</span><span class="pun">(</span><span class="str">"CPUProfile"</span><span class="pun">);</span><br></li><li class="L5"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="pln"> i</span><span class="pun">++</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="pun">){</span><br></li><li class="L6"><span class="pln">        printf</span><span class="pun">(</span><span class="str">"Stupid computing return : %d\n"</span><span class="pun">,</span><span class="pln">stupidComputing</span><span class="pun">(</span><span class="pln">i</span><span class="pun">,</span><span class="pln"> i</span><span class="pun">+));</span><br></li><li class="L7"><span class="pln">        printf</span><span class="pun">(</span><span class="str">"Smart computing return %d\n"</span><span class="pun">,</span><span class="pln">smartComputing</span><span class="pun">(</span><span class="pln">i</span><span class="pun">+,</span><span class="pln"> i</span><span class="pun">+));</span><br></li><li class="L8"><span class="pln">    </span><span class="pun">}</span><br></li><li class="L9"><span class="pln">    printf</span><span class="pun">(</span><span class="str">"should teminate profiling now.\n"</span><span class="pun">);</span><br></li><li class="L0"><span class="pln">    </span><span class="typ">ProfilerStop</span><span class="pun">();</span><br></li><li class="L1"><span class="pln">    sleep</span><span class="pun">();</span></li><li class="L2"><span class="pln">&nbsp;</span></li><li class="L3"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">;</span><br></li><li class="L4"><span class="pun">}</span></li></ol></pre>
+</div>
+<p>　　编译运行：</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">gcc </span><span class="pun">-</span><span class="pln">g test</span><span class="pun">.</span><span class="pln">c </span><span class="pun">-</span><span class="pln">o prog </span><span class="pun">-</span><span class="pln">lprofiler</span></li></ol></pre>
+</div>
+<p>　　</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="kwd">export</span><span class="pln"> CPUPROFILE</span><span class="pun">=</span><span class="pln">info</span><span class="pun">.</span><span class="pln">prof</span></li></ol></pre>
+</div>
+<p>　　执行：</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">pprof </span><span class="pun">-</span><span class="pln">text prog info</span><span class="pun">.</span><span class="pln">prof</span></li></ol></pre>
+</div>
+<p>　　结果：</p>
+<div>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="typ">Using</span><span class="pln"> </span><span class="kwd">local</span><span class="pln"> file prog</span><span class="pun">.</span><br></li><li class="L1"><span class="typ">Using</span><span class="pln"> </span><span class="kwd">local</span><span class="pln"> file info</span><span class="pun">.</span><span class="pln">prof</span><span class="pun">.</span><br></li><li class="L2"><span class="typ">Total</span><span class="pun">:</span><span class="pln">  samples</span><br></li><li class="L3"><span class="pln">      </span><span class="lit">75.4</span><span class="pun">%</span><span class="pln">  </span><span class="lit">75.4</span><span class="pun">%</span><span class="pln">       </span><span class="lit">75.4</span><span class="pun">%</span><span class="pln"> consumeSomeCPUTime1</span><br></li><li class="L4"><span class="pln">       </span><span class="lit">24.6</span><span class="pun">%</span><span class="pln"> </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln">        </span><span class="lit">50.0</span><span class="pun">%</span><span class="pln"> consumeSomeCPUTime2</span><br></li><li class="L5"><span class="pln">          </span><span class="lit">0.0</span><span class="pun">%</span><span class="pln"> </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln">      </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln"> __libc_start_main</span><br></li><li class="L6"><span class="pln">          </span><span class="lit">0.0</span><span class="pun">%</span><span class="pln"> </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln">      </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln"> _start</span><br></li><li class="L7"><span class="pln">          </span><span class="lit">0.0</span><span class="pun">%</span><span class="pln"> </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln">      </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln"> main</span><br></li><li class="L8"><span class="pln">          </span><span class="lit">0.0</span><span class="pun">%</span><span class="pln"> </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln">      </span><span class="lit">100.0</span><span class="pun">%</span><span class="pln"> stupidComputing</span></li></ol></pre>
+</div>
+<p>　</p>
+<p>报错一：</p>
+<p><a href="https://stackoverflow.com/questions/1581494/google-perftool-cannot-read-file-libprofiler-so-0" rel="external nofollow noreferrer">Google perftool cannot read file “libprofiler.so.0”</a></p>
+<p>解决方法：</p>
+<p>sudo&nbsp;/sbin/ldconfig</p>
+<p>错误二：</p>
+<p>Using local file prog.<br>Use of uninitialized value $host in substitution (s///) at /usr/local/bin/pprof line 3366.<br>Use of uninitialized value $hostport in concatenation (.) or string at /usr/local/bin/pprof line 3368.<br>Use of uninitialized value $prefix in concatenation (.) or string at /usr/local/bin/pprof line 3368.<br>Use of uninitialized value $host in substitution (s///) at /usr/local/bin/pprof line 3366.</p>
+<p>解决方法：</p>
+<p>env CPUPROFILE=/tmp/mybin.prof /home/gprofiler-tools/prog</p>
+<p>参考资料：</p>
+<p>１　<a href="https://www.kancloud.cn/subin/blog/619133" rel="external nofollow noreferrer">https://www.kancloud.cn/subin/blog/619133</a></p>
+<p>２　<a href="https://github.com/gperftools/gperftools" rel="external nofollow noreferrer">https://github.com/gperftools/gperftools</a></p>
+<p>３　<a href="https://stackoverflow.com/questions/1581494/google-perftool-cannot-read-file-libprofiler-so-0" rel="external nofollow noreferrer">https://stackoverflow.com/questions/1581494/google-perftool-cannot-read-file-libprofiler-so-0</a></p>
+<p>4&nbsp; &nbsp; <a href="https://www.ibm.com/developerworks/cn/linux/l-cn-googleperf/index.html" rel="external nofollow noreferrer">https://www.ibm.com/developerworks/cn/linux/l-cn-googleperf/index.html</a></p>
+<p>5&nbsp; &nbsp;<a href="https://stackoverflow.com/questions/24086867/cant-analyse-the-output-the-profile-file-of-gperftools-profiler" rel="external nofollow noreferrer">https://stackoverflow.com/questions/24086867/cant-analyse-the-output-the-profile-file-of-gperftools-profiler</a></p>												
+											<h2><a href="https://www.shuzhiduo.com/R/KE5QmDbk5L/">linux下应用程序性能剖分神器gprofiler-tools－安装和使用的更多相关文章</a></h2>	
+<ol>
+								<li><a href="https://www.shuzhiduo.com/A/l1dywvOVJe/">VMware，win7与linux centos6.4文件互传，linux下挂载windows共享文件夹，vmware tools安装方法</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">本方法是以win7,VMware9.0.1 ,centos6.4为基础实验的. 对于linux的初级使用阶段,都会Windows中使用linux虚拟机VMWare或者其它的.在Windows与linu ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/gVdnW9nQzW/">linux下关于程序性能和系统性能的工具、方法</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">观察性能/状态的方法:top free netstat /pro/目录下的信息 其中/pro/meminfo下的信息相当丰富 ------------------------------------- ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/qVde2Z2MzP/">linux下c程序调用reboot函数实现直接重启【转】</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">转自:http://www.blog.chinaunix.net/uid-20564848-id-73878.html linux下c程序调用reboot函数实现直接重启 当然你也可以直接调用syst ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/q4zVmR8ldK/">Linux下C程序的编辑，编译和运行以及调试</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">国内私募机构九鼎控股打造APP,来就送&nbsp;20元现金领取地址:http://jdb.jiudingcapital.com/phone.html 内部邀请码:C8E245J&nbsp;(不写邀请码,没有现金送) 国 ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/8Bz8g706dx/">位图文件（BMP）格式以及Linux下C程序实现（转）</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">源:位图文件(BMP)格式以及Linux下C程序实现 说到图片,位图(Bitmap)当然是最简单的,它是Windows显示图片的基本格式,其文件扩展名为*.BMP.由于没有经过任何的压缩,故BMP图  ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/1O5EraX7d7/">Linux下C程序内存泄露检测</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">在linux下些C语言程序,最大的问题就是没有一个好的编程IDE,当然想kdevelop等工具都相当的强大,但我还是习惯使用kdevelop工具,由于没有一个习惯的编程IDE,内存检测也就成了在lin ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/Gkz1wnbZ5R/">Linux下C程序的内存映像</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">2.Linux下C程序的内存映像 2.1. 代码段.只读数据段(1)对应着程序中的代码(函数),代码段在Linux中又叫文本段(.text)(2)只读数据段就是在程序运行期间只能读不能写的数据,con ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/LPdoD4ryz3/">Red Gate系列之五 .NET Reflector 7.6.1.824 Edition .NET程序反编译神器(附插件安装教程2012-10-13更新) 完全破解+使用教程</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">原文:Red Gate系列之五 .NET Reflector 7.6.1.824 Edition .NET程序反编译神器(附插件安装教程2012-10-13更新) 完全破解+使用教程 Red Gate ...</p>
+		</li>
+						<li><a href="https://www.shuzhiduo.com/A/q4zVORPbJK/">Linux下的暴力密码在线破解工具Hydra安装及其组件安装-使用</a>
+		<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">Linux下的暴力密码在线破解工具Hydra安装及其组件安装-使用 hydra可以破解: http://www.thc.org/thc-hydra,可支持AFP, Cisco AAA, Cisco a ...</p>
+		</li>
+		</ol>
+	
+
+<h2>随机推荐</h2>	
+<ol>
+									<li><a href="https://www.shuzhiduo.com/A/amd0ObBq5g/">html网页练习豆瓣网</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">html &lt;/head&gt; &lt;body&gt; &nbsp;&nbsp;&nbsp; &lt;!-- 头部 --&gt; &nbsp;&nbsp;&nbsp; &lt;header class="header1"&gt; &nbsp; ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/WpdKmaBAJV/">jQuery之动画</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">动画相关方法: .hide()..show()..toggle() 参数:null 或 (duration, easing, callblack) .fadeIn..fadeout ..fadeTog ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/kPzOgxWQzx/">OkHttp  同步异步操作</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">OkHttp是一个Java和Android的HTTP和HTTP/2的客户端,负责发送HTTP请求以及接受HTTP响应. 一.使用OkHttp OkHttp发送请求后,可以通过同步或异步地方式获取响应. ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/B0zqDqgZdv/">CORSFilter  跨域资源访问</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">CORS 定义 Cross-Origin Resource Sharing(CORS)跨来源资源共享是一份浏览器技术的规范,提供了 Web 服务从不同域传来沙盒脚本的方法,以避开浏览器的同源策略,是  ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/Ae5RLjw8zQ/">JAVA数据库连接池C3p0 以及阿里Druid提供的连接池</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">一:连接池的定义 本质上就是个容器(集合) 存放数据库连接的容器,当系统初始化后,容器被创建,容器中就会申请一些连接对象,当用户来访问数据库的时候,从容器中取连接对象,用户用完之后,归还. 二:常用的 ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/xl56klamdr/">10. Regular Expression Matching (JAVA)</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">Given an input string (s) and a pattern (p), implement regular expression matching with support for  ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/pRdBK6E9zn/">oracle 查询索引和主键</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">ORACLE: 1.查主键名称:&nbsp;select * from user_constraints&nbsp;where table_name = 'AAA'&nbsp;and constraint_type ='P'; 查 ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/LPdoEbRNJ3/">boost::asio 学习</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">安装 下载-解压 指定安装目录 ./bootstrap.sh --prefix=/usr/local/boost_1_68_0 查看所有必须要编译才能使用的库 ./b2 --show-librarie ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/GBJr6bXWJ0/">printf 字符串格式化</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">在将各种类型的数据构造成字符串时,sprintf 的强大功能很少会让你失望.由于sprintf 跟printf 在用法上几乎一样,只是打印的目的地不同而已,前者打印到字符串中,后者则直接在命令行上输出 ...</p>
+			</li>
+						<li><a href="https://www.shuzhiduo.com/A/QV5ZyYknJy/">图解HTTP第二章</a>
+			<p style="color: rgba(0, 0, 0, 0.32);margin-bottom: 8px;">简单的 HTTP 协议 1&gt;HTTP 协议用于客户端和服务器端之间的通信 HTTP 协议和 TCP/IP 协议族内的其他众多的协议相同,用于客户端和服务器之间的通信.请求访问文本或图像等资源的一 ...</p>
+			</li>
+			</ol>			
+							
+					</div>
+
+					
+					<!--<div class="shareBox  clearfix">
+
+					</div>-->
+					<!--<div class="posts-cjtz content-cjtz clearfix"><img src="/images.grace/2865270162.png" alt="" /></div>	-->										<div class="next-prev-posts clearfix">
+</div>
+						 
+				</div>
+				
+	<div class="clear"></div>
+
+			</div>	
+			
+	<div class="widget"><h3><span>热门专题</span></h3>
+		<div class="widge_tags">
+											<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/spring-boot-%e9%83%a8%e7%bd%b2%e5%88%b0websphere/" title="spring boot 部署到websphere">spring boot 部署到websphere</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/%e5%ad%90%e5%9f%9f%e5%90%8d%e5%a6%82%e4%bd%95%e8%8e%b7%e5%8f%96%e7%88%b6%e5%9f%9f%e5%90%8dcookie/" title="子域名如何获取父域名cookie">子域名如何获取父域名cookie</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/wordpress%e7%94%a8%e6%88%b7%e5%af%86%e7%a0%81%e8%a7%a3%e5%af%86/" title="wordpress用户密码解密">wordpress用户密码解密</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/sql-or%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9/" title="sql or注意事项">sql or注意事项</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/jenkins-2-3%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b/" title="jenkins 2.3安装教程">jenkins 2.3安装教程</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/tcga%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90%e7%aa%81%e5%8f%98%e5%9f%ba%e5%9b%a0/" title="TCGA数据分析突变基因">TCGA数据分析突变基因</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/mysql-%e8%81%94%e5%90%88%e7%b4%a2%e5%bc%95-%e5%a4%a7%e4%ba%8e%e5%90%8e%e4%bc%9a%e8%b5%b0%e7%bc%a9%e5%bc%95%e5%90%97/" title="mysql 联合索引 大于后会走缩引吗">mysql 联合索引 大于后会走缩引吗</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/rvds-3-1%e4%b8%8b%e8%bd%bd/" title="RVDS 3.1下载">RVDS 3.1下载</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/axios-get-%e6%96%b9%e6%b3%95%e4%b8%ad%e6%b7%bb%e5%8a%a0-data/" title="axios get 方法中添加 data">axios get 方法中添加 data</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/%e8%ae%b0%e4%ba%8b%e6%9c%ac%e7%bc%96%e5%86%99%e8%bf%90%e8%a1%8c%e5%85%b6%e4%bb%96%e6%96%87%e4%bb%b6/" title="记事本编写运行其他文件">记事本编写运行其他文件</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/freemarker%e4%b8%ad%e6%97%a5%e6%9c%9f%e4%b8%ad%e9%97%b4%e6%b2%a1%e6%9c%89%e7%a9%ba%e6%a0%bc/" title="freemarker中日期中间没有空格">freemarker中日期中间没有空格</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/php-insert%e4%bc%9a%e9%87%8d%e5%a4%8d%e5%8a%a0%e8%bd%bd/" title="php insert会重复加载">php insert会重复加载</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/%e5%88%86%e4%ba%ab%e5%88%b0line-js/" title="分享到line js">分享到line js</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/codemirror5%e9%ab%98%e4%ba%ae/" title="codemirror5高亮">codemirror5高亮</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/easyui-tooltip%e5%86%85%e5%ae%b9%e4%b8%8d%e5%88%b7%e6%96%b0/" title="easyui tooltip内容不刷新">easyui tooltip内容不刷新</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/apache%e9%85%8d%e7%bd%ae%e7%94%a8%e6%88%b7%e8%ae%a4%e8%af%81%e8%ae%bf%e9%97%ae%e5%a4%b1%e8%b4%a5%e6%80%8e%e4%b9%88%e5%9b%9e%e4%ba%8b/" title="apache配置用户认证访问失败怎么回事">apache配置用户认证访问失败怎么回事</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/%e7%bd%91%e5%9d%80-%e6%8c%87%e5%ae%9aipv4%e8%ae%bf%e9%97%ae/" title="网址 指定ipv4访问">网址 指定ipv4访问</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/python%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%e5%9b%be%e5%bd%a2%e7%95%8c%e9%9d%a2%e4%b8%8e%e6%95%b0%e6%8d%ae%e8%a1%a8%e5%90%8c%e6%ad%a5%e8%b0%83%e6%95%b4/" title="python如何实现图形界面与数据表同步调整">python如何实现图形界面与数据表同步调整</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/jena-%e5%a6%82%e4%bd%95%e6%9f%a5%e8%af%a2-%e6%9f%90%e4%b8%aa%e5%ae%9e%e4%be%8b/" title="jena 如何查询 某个实例">jena 如何查询 某个实例</a>				</div>
+								<div class="tag-items" style="float: left;">
+					<a href="https://www.shuzhiduo.com/topic/discuz-%e9%a1%b5%e9%9d%a2%e7%bc%93%e5%ad%98/" title="Discuz 页面缓存">Discuz 页面缓存</a>				</div>
+									</div>
+	</div>
+
+		</div>
+</div>
+</div>
+
+<div class="clearfix"></div>
+<div id="footer" class="two-s-footer">
+	<div class="footer-box">
+		<div class="container">
+			<div class="row" style="padding-left: 15px;padding-right: 15px;">
+			<div class="nav-footer">
+				<a href="https://www.shuzhiduo.com/">Home</a>
+				</div>
+				<div class="copyright-footer">
+					<p>Powered By WordPress</p>
+					
+				</div>
+							</div>
+		</div>
+	</div>
+</div>
+<div style="display:none">
+
+</div>
+<script src="./linux下应用程序性能剖分神器gprofiler-tools－安装和使用_files/echo.js"></script>
+<script>
+    echo.init({
+      offset: 100,
+      throttle: 250,
+      unload: false,
+      callback: function (element, op) {
+        console.log(element, 'has been', op + 'ed')
+      }
+    });
+
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?f15ef43e2286a8db87bbc840d67d46b2";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	    
+ </script>
+
+
+</div></body></html>
