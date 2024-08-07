@@ -1,8 +1,11 @@
 #include <cstddef>
 #include <cstdlib>
 #include <string.h>
+#include <unistd.h>
+#ifdef __x86_64__
 #include <emmintrin.h>
 #include <immintrin.h>
+#endif // __x86_64__ 
 #include <vector>
 #include <algorithm>
 
@@ -48,13 +51,18 @@ void BM_write_rand(benchmark::State& state) {
     state.SetLabel(buf);
 }
 
+static const long numcpu = sysconf(_SC_NPROCESSORS_CONF);
 
 #define ARGS \
-    ->RangeMultiplier(2)->Range(1<<10, 1<<30)
+  ->RangeMultiplier(2)->Range(1<<28, 1<<30) \
+  ->ThreadRange(1, numcpu) \
+  ->UseRealTime()
 
-BENCHMARK_TEMPLATE1(BM_write_rand, unsigned int) ARGS;
+//BENCHMARK_TEMPLATE1(BM_write_rand, unsigned int) ARGS;
 BENCHMARK_TEMPLATE1(BM_write_rand, unsigned long) ARGS;
-BENCHMARK_TEMPLATE1(BM_write_rand, __m128i) ARGS;
-BENCHMARK_TEMPLATE1(BM_write_rand, __m256i) ARGS;
+#ifdef __x86_64__
+//BENCHMARK_TEMPLATE1(BM_write_rand, __m128i) ARGS;
+//BENCHMARK_TEMPLATE1(BM_write_rand, __m256i) ARGS;
+#endif // __x86_64__ 
 
 BENCHMARK_MAIN();
