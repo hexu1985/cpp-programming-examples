@@ -27,5 +27,7 @@
     - [C++高性能编程](The.Art.Of.Writing.Efficient.Programs)
     - [C++嵌入式开发实例精解](Embedded.Programming.With.Modern.Cpp.Cookbook)
     - [CPU眼里的C/C++](C.And.Cpp.In.The.Eyes.Of.CPU)
+    - [高级C/C++编译技术](Advanced.C.And.Cpp.Compiling)
+
 
 
