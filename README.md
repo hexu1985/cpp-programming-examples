@@ -26,4 +26,6 @@
     - [C++设计新思维 泛型编程与设计模式之应用](Modern.Cpp.Design)
     - [C++高性能编程](The.Art.Of.Writing.Efficient.Programs)
     - [C++嵌入式开发实例精解](Embedded.Programming.With.Modern.Cpp.Cookbook)
+    - [CPU眼里的C/C++](C.And.Cpp.In.The.Eyes.Of.CPU)
+
 
