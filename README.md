@@ -5,8 +5,6 @@
     - [C++ Primer](Cpp.Primer)
     - [Effective C++](Effective.Cpp)
     - [Effective Modern C++](Effective.Modern.Cpp)
-    - [Accelerated C++](Accelerated.Cpp)
-    - [C++编程你也行](You.Can.Program.In.Cpp)
     - [C++ Templates](Cpp.Templates)
     - [学习C++20](Cpp.20.For.Programmers)
     - [C++20编程技巧](Cpp.20.Recipes)
