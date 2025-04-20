@@ -8,6 +8,7 @@
 # ELF 64-bit LSB pie executable, ARM aarch64
 $ sudo apt update -y
 $ sudo apt install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu build-essential
+$ sudo apt install gdb-multiarch    # 远程调试异构架构
 ```
 
 
