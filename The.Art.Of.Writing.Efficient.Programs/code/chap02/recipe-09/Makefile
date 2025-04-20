@@ -1,19 +1,20 @@
 CXX = clang++
 CXXFLAGS = -g -O3 -mavx2 -Wall -pedantic
-INCLUDES = 
-LDFLAGS = -L$(HOME)/local/gperftools/lib/
-LDLIBS = -lprofiler
+PROGRAM = example
 
-PROGS =	example
+SOURCES = 02_substring_sort.C
+OBJECTS = $(patsubst %.C,%.o,$(SOURCES))
 
-.PHONY: all
-all: $(PROGS)
-	@echo "build OK!"
+.PHONY: all 
+all: $(PROGRAM)
 
+$(PROGRAM): $(OBJECTS)
+	$(CXX) -o $(PROGRAM) $(OBJECTS)
+
+$(OBJECTS): %.o: %.C
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+.PHONY: clean
 clean:
-	@$(RM) $(PROGS) *.o prof.data
-	@echo "clean OK!"
-
-example: example.C
-	$(CXX) -o $@ $^ $(CXXFLAGS) $(INCLUDES) $(LDFLAGS) $(LDLIBS)
+	rm -f $(OBJECTS) $(PROGRAM) out.* perf.data* flamegraph.svg
 

@@ -1,19 +1,24 @@
+GPERFTOOLS_DIR = $(HOME)/local/gperftools
+
 CXX = clang++
 CXXFLAGS = -g -O3 -mavx2 -Wall -pedantic
-INCLUDES = 
-LDFLAGS = -L$(HOME)/local/gperftools/lib/
+LDFLAGS = -Wl,-rpath,$(GPERFTOOLS_DIR)/lib -Wl,--enable-new-dtags -L$(GPERFTOOLS_DIR)/lib
 LDLIBS = -lprofiler
+PROGRAM = example
 
-PROGS =	example
+SOURCES = 02_substring_sort.C
+OBJECTS = $(patsubst %.C,%.o,$(SOURCES))
 
-.PHONY: all
-all: $(PROGS)
-	@echo "build OK!"
+.PHONY: all 
+all: $(PROGRAM)
 
+$(PROGRAM): $(OBJECTS)
+	$(CXX) $(LDFLAGS) -o $(PROGRAM) $(OBJECTS) $(LDLIBS)
+
+$(OBJECTS): %.o: %.C
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+.PHONY: clean
 clean:
-	@$(RM) $(PROGS) *.o prof.data prof.pdf
-	@echo "clean OK!"
-
-example: compare.C compare1.C compare2.C example.C
-	$(CXX) -o $@ $^ $(CXXFLAGS) $(INCLUDES) $(LDFLAGS) $(LDLIBS)
+	rm -f $(OBJECTS) $(PROGRAM) prof.data cpu.prof cpu.svg prof.pdf
 
