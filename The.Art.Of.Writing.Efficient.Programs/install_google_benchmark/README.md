@@ -1,3 +1,10 @@
+### Ubuntu24.04 上 apt install Google benchmark
+
+```
+$ sudo apt update
+$ sudo apt install libbenchmark-dev
+```
+
 ### Google benchmark编译安装
 
 google/benchmark基于c++11标准和googletest框架，所以安装前需要先做一些准备工作。
