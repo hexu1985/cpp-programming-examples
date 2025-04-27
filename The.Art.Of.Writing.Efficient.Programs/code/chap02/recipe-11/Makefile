@@ -14,6 +14,6 @@ clean:
 	@$(RM) $(PROGS) *.o
 	@echo "clean OK!"
 
-benchmark: 09_compare_timer.C
+benchmark: 06_compare_timer.C
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(INCLUDES) $(LDFLAGS) $(LDLIBS)
 
