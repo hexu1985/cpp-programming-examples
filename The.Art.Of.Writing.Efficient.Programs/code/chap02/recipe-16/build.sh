@@ -2,6 +2,5 @@
 
 set -x
 GBENCH_DIR=~/local/google_benchmark
-clang++ -g -O3 -mavx2 -Wall -pedantic -I${GBENCH_DIR}/include benchmark.C \
-   ${GBENCH_DIR}/lib/libbenchmark.a -pthread -lrt -lm -o benchmark
-./benchmark --benchmark_repetitions=10 --benchmark_report_aggregates_only=true
+clang++ -g -O3 -mavx2 -Wall -pedantic -I${GBENCH_DIR}/include 10a_compare_mbm.C \
+    -L${GBENCH_DIR}/lib/ -lbenchmark -pthread -lrt -lm -o benchmark
