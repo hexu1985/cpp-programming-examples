@@ -9,4 +9,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message( STATUS "CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME}" )
 message( STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}" )
 
+set(TEST_SCRIPTS test.sh)
+
+foreach(script ${TEST_SCRIPTS})
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${script}
+        #COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_SOURCE_DIR}/${script}
+                ${CMAKE_CURRENT_BINARY_DIR}/${script}
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${script}
+        COMMENT "Copying test script ${script}"
+    )
+endforeach()
+
 add_executable( example 04_substring_sort.C 04_substring_sort_a.C )
+add_dependencies( example copy_scripts )
