@@ -18,6 +18,6 @@ all: $(PROGS)
 clean:
 	$(RM) $(PROGS)
 
-benchmark: benchmark.C
+benchmark: 10_compare_mbm.C
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(INCLUDES) $(LDFLAGS) $(LDLIBS)
 
