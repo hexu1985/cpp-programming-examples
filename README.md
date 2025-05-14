@@ -27,5 +27,3 @@
     - [CPU眼里的C/C++](C.And.Cpp.In.The.Eyes.Of.CPU)
     - [高级C/C++编译技术](Advanced.C.And.Cpp.Compiling)
 
-
-
