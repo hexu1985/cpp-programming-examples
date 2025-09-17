@@ -19,7 +19,7 @@ server = 127.0.0.1
 )"s
       };
 
-      auto rx = std::regex{ R"(^(?!#)(\w+)\s*=\s*([\w\d]+[\w\d._,\-:]*)$)"s };
+      auto rx = std::regex{ R"(^(?!#)(\w+)\s*=\s*([\w\d]+[\w\d._,\-:]*)$)"s, std::regex_constants::multiline };
 
       {
          auto match = std::smatch{};
