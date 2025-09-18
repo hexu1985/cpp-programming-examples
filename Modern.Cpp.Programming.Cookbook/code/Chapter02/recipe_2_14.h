@@ -1,5 +1,17 @@
 #pragma once
 
+#include <string>
+
+#ifdef HAS_FORMAT_LIBRARY
+#include <format>
+using namespace std;
+#else
+#define FMT_HEADER_ONLY
+#include "fmt/chrono.h"
+#include "fmt/format.h"
+using namespace fmt;
+#endif
+
 namespace recipe_2_14
 {
    namespace v1
@@ -24,30 +36,38 @@ namespace recipe_2_14
 }
 
 #ifdef HAS_FORMAT_LIBRARY
+namespace std {
+#else
+namespace fmt {
+#endif
+
 template <>
-struct std::formatter<recipe_2_14::v1::employee>
+struct formatter<recipe_2_14::v1::employee>
 {
-   constexpr auto parse(format_parse_context& ctx)
+   constexpr auto parse(format_parse_context& ctx) 
    {
       return ctx.begin();
    }
 
-   auto format(recipe_2_14::v1::employee const& e, format_context& ctx) {
-      return std::format_to(ctx.out(),
+   auto format(recipe_2_14::v1::employee const& e, format_context& ctx) const {
+      return format_to(ctx.out(),
          "[{}] {} {}",
          e.id, e.firstName, e.lastName);
    }
 };
 
 template<>
-struct std::formatter<recipe_2_14::v2::employee>
+struct formatter<recipe_2_14::v2::employee>
 {
    bool lexicographic_order = false;
 
    template <typename ParseContext>
-   constexpr auto parse(ParseContext& ctx)
+   constexpr auto parse(ParseContext& ctx) 
    {
       auto iter = ctx.begin();
+      if (iter == ctx.end()) {
+          return iter;
+      }
       auto get_char = [&]() { return iter != ctx.end() ? *iter : 0; };
 
       if (get_char() == ':') ++iter;
@@ -58,38 +78,41 @@ struct std::formatter<recipe_2_14::v2::employee>
       case '}': return ++iter;
       case 'L': lexicographic_order = true; return ++iter;
       case '{': return ++iter;
-      default: throw std::format_error("invalid format");
+      default: throw format_error("invalid format");
       }
    }
 
    template <typename FormatContext>
-   auto format(recipe_2_14::v2::employee const& e, FormatContext& ctx)
+   auto format(recipe_2_14::v2::employee const& e, FormatContext& ctx) const
    {
       if (lexicographic_order)
-         return std::format_to(ctx.out(), "[{}] {}, {}", e.id, e.lastName, e.firstName);
+         return format_to(ctx.out(), "[{}] {}, {}", e.id, e.lastName, e.firstName);
 
-      return std::format_to(ctx.out(), "[{}] {} {}", e.id, e.firstName, e.lastName);
+      return format_to(ctx.out(), "[{}] {} {}", e.id, e.firstName, e.lastName);
    }
 };
+
+#ifdef HAS_FORMAT_LIBRARY
+}   // namespace std
+#else
+}   /// namespace fmt
 #endif
 
 namespace recipe_2_14
 {
    void execute()
    {
-#ifdef HAS_FORMAT_LIBRARY
       {
          v1::employee e{ 42, "John", "Doe" };
-         auto s1 = std::format("{}", e);   // [42] John Doe
-         auto s2 = std::format("{:L}", e); // error
+         auto s1 = format("{}", e);   // [42] John Doe
+         // auto s2 = format("{:L}", e); // error
       }
 
       {
          v2::employee e{ 42, "John", "Doe" };
-         auto s1 = std::format("{}", e);   // [42] John Doe
-         auto s2 = std::format("{:L}", e); // [42] Doe, John
-         auto s3 = std::format("{:A}", e); // error (invalid format)
+         auto s1 = format("{}", e);   // [42] John Doe
+         auto s2 = format("{:L}", e); // [42] Doe, John
+         // auto s3 = format("{:A}", e); // error (invalid format)
       }
-#endif
    }
 }
