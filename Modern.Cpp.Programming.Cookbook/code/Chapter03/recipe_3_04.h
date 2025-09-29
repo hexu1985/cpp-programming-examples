@@ -54,9 +54,9 @@ namespace recipe_3_04
       }
 
       {
-         auto lfib = fib_create2();
+         auto lfib = fib_create();
 
-         // auto f10 = lfib(10); // crash
+         auto f10 = lfib(10); // crash
       }
 
       {
