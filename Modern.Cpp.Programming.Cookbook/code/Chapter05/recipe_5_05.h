@@ -22,6 +22,7 @@ namespace recipe_5_05
 
    void execute()
    {
+      std::cout << std::dec;
       {
          std::vector<int> v{ 1, 1, 2, 3, 5, 8, 13 };
 

@@ -116,11 +116,11 @@ namespace recipe_5_10
             return *(ptr + index);
          }
 
-         reference operator-> () const
+         pointer operator-> () const
          {
             if (ptr == nullptr)
                throw std::bad_function_call();
-            return *(ptr + index);
+            return ptr + index;
          }
 
          // --- input iterator ---
@@ -370,6 +370,8 @@ namespace recipe_5_10
 
          auto p0 = &a[0];
          std::cout << p0->priority << " " << p0->name << '\n';
+         auto p1 = a.begin();
+         std::cout << p1->priority << " " << p1->name << '\n';
       }
 
       {
@@ -381,7 +383,7 @@ namespace recipe_5_10
          a[4] = std::make_unique<Tag>(5, "Tag 5");
 
          for (auto it = a.begin(); it != a.end(); ++it)
-            std::cout << it->id << " " << it->name << '\n';
+            std::cout << (*it)->id << " " << (*it)->name << '\n';
 
          auto p0 = a[0].get();
          std::cout << p0->id << " " << p0->name << '\n';
