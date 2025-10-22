@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <cstring>
+#include <cstdint>
 
 #ifdef HAS_BITS_LIBRARY
 #include <bit>
