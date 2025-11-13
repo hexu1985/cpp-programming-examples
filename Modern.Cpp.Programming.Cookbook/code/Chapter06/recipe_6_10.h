@@ -7,7 +7,7 @@
 namespace recipe_6_10
 {
 #ifdef HAS_SPAN
-   void func(int* buffer, size_t length) { /* … */ }
+   void func(int* buffer, size_t length) { /* ? */ }
 
    void func(std::span<int> buffer)
    {
@@ -37,6 +37,8 @@ namespace recipe_6_10
       }
 
       {
+         int arr[] = { 1, 1, 2, 3, 5, 8, 13 };
+         std::span<int, 7> s{ arr };
          std::span<int> first_3 = s.first(3);
          func(first_3);  // 1 1 2
          std::span<int> last_3 = s.last(3);
