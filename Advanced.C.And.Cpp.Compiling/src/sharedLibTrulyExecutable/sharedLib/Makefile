@@ -64,6 +64,7 @@ clean:
 	rm $(OBJECTS) $(EXECUTABLE)
 
 deploy:
+	mkdir -p $(DEPLOY_PATH)
 	make clean; make; cp $(EXECUTABLE) $(DEPLOY_PATH);
 
 
