@@ -9,6 +9,7 @@
     - [学习C++20](Cpp.20.For.Programmers)
     - [C++20编程技巧](Cpp.20.Recipes)
     - [现代C++编程实战](Modern.Cpp.Programming.Cookbook)
+    - [现代C++编程 从入门到实践](Cpp.Crash.Course)
 + 标准库
     - [标准C++输入输出流与本地化](Standard.Cpp.IOStreams.And.Locales)
     - [C++标准库](The.Cpp.Standard.Library)
