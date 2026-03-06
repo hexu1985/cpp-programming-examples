@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch.hpp"
-#include "..\testlib\point3d.h"
+#include "../testlib/point3d.h"
 
 TEST_CASE("test construction", "[create]")
 {

@@ -1,6 +1,6 @@
 #define BOOST_TEST_MODULE Testing point 3d
 #include <boost/test/included/unit_test.hpp>
-#include "..\testlib\point3d.h"
+#include "../testlib/point3d.h"
 
 BOOST_AUTO_TEST_SUITE(test_construction)
 
