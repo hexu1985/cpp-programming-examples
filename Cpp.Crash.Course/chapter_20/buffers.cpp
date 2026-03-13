@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
-#include <catch2/catch.hpp>
 #include <boost/asio.hpp>
+#include "catch2/catch.hpp"
 
 TEST_CASE("const_buffer default constructor") {
   boost::asio::const_buffer cb;

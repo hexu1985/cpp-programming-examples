@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1...3.14)
 
 project(chapter_20 LANGUAGES CXX)
 
-catch_add_test(buffers buffers.cpp)
+add_executable(buffers buffers.cpp)
 add_executable(asio asio.cpp)
 add_executable(name_resolution name_resolution.cpp)
 add_executable(name_resolution_async name_resolution_async.cpp)
